@@ -1,4 +1,4 @@
-# Comamnd Line Data Wrangling
+# Command Line Data Wrangling
 
 Wrangling data using only (unix) shell commands.
 
