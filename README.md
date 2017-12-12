@@ -87,3 +87,36 @@ Sort a CSV file by 2nd, 1st and 3rd columns.
 
 ### Group By
 
+### View a CSV file on the command line
+
+You can just do a simple cat:
+
+```
+cat somefile.csv
+```
+
+For a nice view with proper spacing:
+
+```
+column -s, -t < somefile.csv | less -#2 -N -S
+```
+
+Note: when you have empty fields, you will need to put some kind of placeholder in it, otherwise the column gets merged with following columns. The following example demonstrates how to use sed to insert a placeholder:
+
+```
+$ cat data.csv
+1,2,3,4,5
+1,,,,5
+$ sed 's/,,/, ,/g;s/,,/, ,/g' data.csv | column -s, -t
+1  2  3  4  5
+1           5
+$ cat data.csv
+1,2,3,4,5
+1,,,,5
+$ column -s, -t < data.csv
+1  2  3  4  5
+1  5
+$ sed 's/,,/, ,/g;s/,,/, ,/g' data.csv | column -s, -t
+1  2  3  4  5
+1           5
+```
