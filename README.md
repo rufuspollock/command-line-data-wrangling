@@ -105,7 +105,7 @@ cat somefile.csv
 For a nice view with proper spacing:
 
 ```bash
-column -s, -t < somefile.csv | less -#2 -N -S
+column -s, -t -n < somefile.csv | less -#2 -N -S
 ```
 
 Note: when you have empty fields, you will need to put some kind of placeholder in it, otherwise the column gets merged with following columns. The following example demonstrates how to use sed to insert a placeholder:
@@ -114,16 +114,16 @@ Note: when you have empty fields, you will need to put some kind of placeholder 
 $ cat data.csv
 1,2,3,4,5
 1,,,,5
-$ sed 's/,,/, ,/g;s/,,/, ,/g' data.csv | column -s, -t
+$ sed 's/,,/, ,/g;s/,,/, ,/g' data.csv | column -s, -t -n
 1  2  3  4  5
 1           5
 $ cat data.csv
 1,2,3,4,5
 1,,,,5
-$ column -s, -t < data.csv
+$ column -s, -t -n < data.csv
 1  2  3  4  5
 1  5
-$ sed 's/,,/, ,/g;s/,,/, ,/g' data.csv | column -s, -t
+$ sed 's/,,/, ,/g;s/,,/, ,/g' data.csv | column -s, -t -n
 1  2  3  4  5
 1           5
 ```
