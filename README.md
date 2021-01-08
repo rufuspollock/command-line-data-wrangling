@@ -7,14 +7,14 @@ be any other kind of delimiter)!
 
 ## Tools of the trade
 
-* cut = filter columns
-* sed = replace (and much more)
-* grep = filter rows
-* sort = sort!
-* uniq = count duplicate (with sort = crude group by)
-* paste = join 2 files (line by line)
-* wc = count lines or "words"
-* split = split a file into pieces (less useful)
+* `cut` = filter columns
+* `sed` = replace (and much more)
+* `grep` = filter rows
+* `sort` = sort!
+* `uniq` = count duplicate (with sort = crude group by)
+* `paste` = join 2 files (line by line)
+* `wc` = count lines or "words"
+* `split` = split a file into pieces (less useful)
 
 The limitation of most shell utilities for CSV is that:
 
@@ -43,8 +43,9 @@ for feeding the output of one command into the input of another and doing so in
 a streaming "pipe-like" manner.
 
 Example:
-
-    head -n20 file.txt | tail -n5 | cut -c1-10
+```bash
+head -n20 file.txt | tail -n5 | cut -c1-10
+```
 
 This take first 20 lines of file.txt pipes that into tail which takes first 5
 lines of that pipes that into cut which take characters 1-10 of each line. The
@@ -58,32 +59,38 @@ result: characters 1-10 of lines 15-20.
 If continuous lines at top and bottom of the file use head or tail.
 
 Delete first line:
-
-    tail -n +2 {file}
+```bash
+tail -n +2 {file}
+```
 
 Delete last line:
-
-    head -n +2 {file}
+```bash
+head -n +2 {file}
+```
 
 ### Delete Lines Generally
 
 Delete the nth line:
-
-    sed nd {file}
+```bash
+sed nd {file}
+```
 
 Delete a range of lines (n-m):
-
-    sed n,md {file}
+```bash
+sed n,md {file}
+```
 
 Multiple deletes (first, third, n-m)
-
-    sed 1;3;n,md {file}
+```bash
+sed 1;3;n,md {file}
+```
 
 ### Sort
 
 Sort a CSV file by 2nd, 1st and 3rd columns.
-
-    sort --field-separator=',' --key=2,1,3 {file}
+```bash
+sort --field-separator=',' --key=2,1,3 {file}
+```
 
 ### Group By
 
@@ -91,19 +98,19 @@ Sort a CSV file by 2nd, 1st and 3rd columns.
 
 You can just do a simple cat:
 
-```
+```bash
 cat somefile.csv
 ```
 
 For a nice view with proper spacing:
 
-```
+```bash
 column -s, -t < somefile.csv | less -#2 -N -S
 ```
 
 Note: when you have empty fields, you will need to put some kind of placeholder in it, otherwise the column gets merged with following columns. The following example demonstrates how to use sed to insert a placeholder:
 
-```
+```console
 $ cat data.csv
 1,2,3,4,5
 1,,,,5
